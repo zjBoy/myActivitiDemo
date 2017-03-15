@@ -6,12 +6,17 @@ import org.activiti.engine.repository.DeploymentBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.king.services.ActivitiService;
 
-@RestController
+import utils.ErrorUtil;
+
+@Controller
 public class ActivitiController {
 	@Autowired
 	public ActivitiService as;
@@ -23,7 +28,9 @@ public class ActivitiController {
 	 * 发布流程
 	 * @return
 	 */
-	public String deployActiviti(){
+	 @RequestMapping(value="/deploy",method=RequestMethod.POST)
+	 @ResponseBody
+	public  String deployActiviti(){
 		//创建部署对象
 		DeploymentBuilder deploymentBuilder = repositoryService.createDeployment();
 		//加载流程的配置文件和图片
@@ -33,7 +40,7 @@ public class ActivitiController {
 						 .addClasspathResource("diagrams/leave.png");
 		//部署流程
 		deploymentBuilder.deploy();
-		return "";
+		return ErrorUtil.create("0000", "发布成功").toJSONString();
 	}
 	/**
 	 * 使用java代码初始化环境
@@ -41,7 +48,6 @@ public class ActivitiController {
 	 @RequestMapping(value="/init")
 	public String initContextWithCode(Model model) {
 		 System.out.println(processEngine);
-		 deployActiviti();
 		return "menu";
 	}
 }

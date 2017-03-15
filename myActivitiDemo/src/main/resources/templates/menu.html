@@ -7,14 +7,22 @@
 <link rel="stylesheet" type="text/css" href="/plugs/bootstrap-3.3.7-dist/css/bootstrap.min.css" ></link>
 <script src="/js/angular/angular-1.0.1.min.js"></script>
 <script>
-	var app = angular.module('app', []);
+	var app = angular.module('myApp', []);
+	app.controller('deployCtrl', function($scope, $http) {
+		$scope.deploy=function(){
+			  $http.post("/deploy").success(function (response) {
+				$scope.names = response.errCode;
+				alert(response.errMsg);
+			  });
+		};
+	});
 </script>
 </head>
-<body ng-app="app">
+<body ng-app="myApp">
 
-<div class="container">
+<div class="container" ng-controller="deployCtrl"> 
 <ul>
-	<li> <a href="">发布流程</a></li>
+	<li> <a ng-click="deploy()">发布流程</a></li>
 </ul>
 </div>
 </body>
