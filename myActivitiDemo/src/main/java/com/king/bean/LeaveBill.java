@@ -20,6 +20,16 @@ public class LeaveBill implements Serializable{
 	
 	String userId;
 	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	String userName;
+	
 	
 	
 

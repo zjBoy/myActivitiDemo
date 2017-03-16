@@ -1,5 +1,9 @@
 package com.king.controller.activiti;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
@@ -7,10 +11,12 @@ import org.activiti.engine.repository.DeploymentBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.king.bean.LeaveBill;
 import com.king.services.ActivitiService;
 
 import utils.ErrorUtil;
@@ -46,10 +52,14 @@ public class ActivitiController {
 	 /**
 	  * 启动一个流程
 	  */
-	 @RequestMapping(value="/startProcess",method=RequestMethod.POST)
+	 @RequestMapping(value="/leaveBillApply",method=RequestMethod.POST)
 	 @ResponseBody
-	public String startProcess() {
-		runtimeService.startProcessInstanceByKey("leaveBill");
+	public String startProcess(@ModelAttribute("leaveBill") LeaveBill leaveBill) {
+		 Map<String, Object> map = new HashMap<String, Object>();
+		 map.put("userName", leaveBill.getUserName());
+		 map.put("days", leaveBill.getDays());
+		 map.put("reason", leaveBill.getReason());
+		runtimeService.startProcessInstanceByKey("leaveBill",map);
 		return ErrorUtil.create("0000", "启动流程成功").toJSONString();
 	} 
 	/**
@@ -60,4 +70,11 @@ public class ActivitiController {
 		 System.out.println(processEngine);
 		return "menu";
 	}
+	 /**
+	  * 跳转到我要请假页面
+	  */
+	 @RequestMapping(value="/askForLeave")
+	 public String askForLeave() {
+		 return "askForLeave";
+	 }
 }

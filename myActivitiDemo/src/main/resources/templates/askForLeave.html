@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>我要请假</title>
+<link rel="stylesheet" type="text/css" href="/css/hello.css" ></link>
+<link rel="stylesheet" type="text/css" href="/plugs/bootstrap-3.3.7-dist/css/bootstrap.min.css" ></link>
+<script src="/js/jquery-1.8.2.min.js"></script>
+<script src="/js/angular/angular-1.0.1.min.js"></script>
+<script>
+	var app = angular.module('myApp', []);
+	app.controller('deployCtrl', function($scope, $http) {
+		$scope.leaveBillApply=function(leaveBill){
+			  $http.post("/leaveBillApply",leaveBill).success(function (response) {
+				$scope.names = response.errCode;
+				alert(response.errMsg);
+			  });
+		};
+	});
+</script>
+</head>
+<body ng-app="myApp">
+	<form class="form-group text-center form-group-sm mairing-top-5"  ng-controller="deployCtrl">
+		<div class="mairing-bottom-5">
+			<span>姓名：</span><input id="userName" name="userName" type="text" class="input-sm" ng-model="leaveBill.userName"/>
+		</div>
+		<div class="mairing-bottom-5">
+			<span>天数：</span><input id="days" name="days" type="text" class="input-sm" ng-model="leaveBill.days"/>
+		</div>
+		<div class="mairing-bottom-5">
+			<span>原因：</span><input id="reason" name="reason" type="text" class="input-sm" ng-model="leaveBill.reason"/>
+		</div>
+		<div class="text-center">
+			<input id="btn" name="btn" type="button" class="btn" value="请假申请" ng-click="leaveBillApply(leaveBill)"/>
+		</div>
+	</form>
+</body>
+</html>
