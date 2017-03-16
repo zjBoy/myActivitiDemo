@@ -2,14 +2,13 @@ package com.king.controller.activiti;
 
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.RepositoryService;
+import org.activiti.engine.RuntimeService;
 import org.activiti.engine.repository.DeploymentBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.king.services.ActivitiService;
@@ -24,6 +23,8 @@ public class ActivitiController {
 	ProcessEngine processEngine;
 	@Autowired
 	RepositoryService repositoryService;
+	@Autowired
+	RuntimeService runtimeService;
 	/**
 	 * 发布流程
 	 * @return
@@ -42,6 +43,15 @@ public class ActivitiController {
 		deploymentBuilder.deploy();
 		return ErrorUtil.create("0000", "发布成功").toJSONString();
 	}
+	 /**
+	  * 启动一个流程
+	  */
+	 @RequestMapping(value="/startProcess",method=RequestMethod.POST)
+	 @ResponseBody
+	public String startProcess() {
+		runtimeService.startProcessInstanceByKey("leaveBill");
+		return ErrorUtil.create("0000", "启动流程成功").toJSONString();
+	} 
 	/**
 	 * 使用java代码初始化环境
 	 */

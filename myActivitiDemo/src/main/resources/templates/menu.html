@@ -15,6 +15,11 @@
 				alert(response.errMsg);
 			  });
 		};
+		$scope.startProcess=function(){
+			  $http.post("/startProcess").success(function (response) {
+				$scope.names = response.errCode;
+			  });
+		};
 	});
 </script>
 </head>
@@ -23,6 +28,7 @@
 <div class="container" ng-controller="deployCtrl"> 
 <ul>
 	<li> <a ng-click="deploy()">发布流程</a></li>
+	<li> <a ng-click="startProcess()">启动一个流程</a></li>
 </ul>
 </div>
 </body>
