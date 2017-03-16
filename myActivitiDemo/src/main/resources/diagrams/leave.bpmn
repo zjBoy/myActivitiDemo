@@ -9,8 +9,12 @@
     <exclusiveGateway id="exclusivegateway1" name="Exclusive Gateway"></exclusiveGateway>
     <userTask id="bossApprove" name="老板审批"></userTask>
     <sequenceFlow id="flow2" sourceRef="apply" targetRef="exclusivegateway1"></sequenceFlow>
-    <sequenceFlow id="flow3" sourceRef="exclusivegateway1" targetRef="managerApprove"></sequenceFlow>
-    <sequenceFlow id="flow4" sourceRef="exclusivegateway1" targetRef="bossApprove"></sequenceFlow>
+    <sequenceFlow id="flow3" sourceRef="exclusivegateway1" targetRef="managerApprove">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${days>0&&days<5}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow4" sourceRef="exclusivegateway1" targetRef="bossApprove">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${days>=5}]]></conditionExpression>
+    </sequenceFlow>
     <sequenceFlow id="flow5" sourceRef="bossApprove" targetRef="end"></sequenceFlow>
     <sequenceFlow id="flow6" sourceRef="managerApprove" targetRef="end"></sequenceFlow>
   </process>
