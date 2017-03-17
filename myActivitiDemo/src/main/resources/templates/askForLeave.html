@@ -20,19 +20,22 @@
 </script>
 </head>
 <body ng-app="myApp">
-	<form class="form-group text-center form-group-sm mairing-top-5"  ng-controller="deployCtrl">
-		<div class="mairing-bottom-5">
-			<span>姓名：</span><input id="userName" name="userName" type="text" class="input-sm" ng-model="leaveBill.userName"/>
-		</div>
-		<div class="mairing-bottom-5">
-			<span>天数：</span><input id="days" name="days" type="text" class="input-sm" ng-model="leaveBill.days"/>
-		</div>
-		<div class="mairing-bottom-5">
-			<span>原因：</span><input id="reason" name="reason" type="text" class="input-sm" ng-model="leaveBill.reason"/>
-		</div>
-		<div class="text-center">
-			<input id="btn" name="btn" type="button" class="btn" value="请假申请" ng-click="leaveBillApply(leaveBill)"/>
-		</div>
-	</form>
+<div th:include="menu :: left" class="leftMenu"></div>
+	<div id="divMain"   class="float_left divMain">
+		<form class="form-group text-center form-group-sm mairing-top-5"  ng-controller="deployCtrl">
+			<div class="mairing-bottom-5">
+				<span>姓名：</span><input id="userName" name="userName" type="text" class="input-sm" ng-model="leaveBill.userName"/>
+			</div>
+			<div class="mairing-bottom-5">
+				<span>天数：</span><input id="days" name="days" type="text" class="input-sm" ng-model="leaveBill.days"/>
+			</div>
+			<div class="mairing-bottom-5">
+				<span>原因：</span><input id="reason" name="reason" type="text" class="input-sm" ng-model="leaveBill.reason"/>
+			</div>
+			<div class="text-center">
+				<input id="btn" name="btn" type="button" class="btn" value="请假申请" ng-click="leaveBillApply(leaveBill)"/>
+			</div>
+		</form>
+	</div>
 </body>
 </html>

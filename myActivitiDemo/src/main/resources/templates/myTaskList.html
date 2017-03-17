@@ -10,15 +10,8 @@
 
 </head>
 <body>
-<div id="divMain" ng-app="myApp" ng-controller="myCtrl">
-	<table class="table table-bordered">
-		<tr ng-repeat="x in items">
-			<td>{{ $index + 1 }}</td>
-			<td ng-bind="x.id"></td>
-			<td ng-bind="x.name"></td>
-			<td ng-bind="x.time"></td>
-		</tr>
-	</table>
+<div th:include="menu :: left" class="leftMenu"></div>
+<div id="divMain" class="float_left divMain">
 </div>
 </body>
 </html>

@@ -21,8 +21,10 @@
 </script>
 
 </head>
-<body>
-<div id="divMain" ng-app="myApp" ng-controller="claimTaskCtrl" data-ng-init="claimTask()">
+
+<body ng-app="myApp">
+<div th:include="menu :: left" class="leftMenu"></div>
+<div id="divMain"  ng-controller="claimTaskCtrl" data-ng-init="claimTask()" class="float_left divMain">
 <div ng-include="'menu.html'"></div>
 	<table class="table table-bordered">
 		<tr>

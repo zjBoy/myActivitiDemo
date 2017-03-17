@@ -11,7 +11,7 @@ import com.king.controller.activiti.ActivitiController;
 public class indexController {
 	 @RequestMapping("/")
 	public String index(Model model){
-		model.addAttribute("welcome","欢迎大家学习来听我分享工作流知识");
+		model.addAttribute("welcome","欢迎大家来听我分享工作流知识");
 		return "index";
 	}
 }
