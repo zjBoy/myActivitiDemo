@@ -61,4 +61,18 @@ public class ErrorUtil {
 		}
 		return jsonRes;
 	}
+	public static String toJSONString(Object obj){
+		ObjectMapper objectMapper = new ObjectMapper();
+		String jsonRes="";
+		try {
+			jsonRes = objectMapper.writeValueAsString(obj);
+		} catch (JsonGenerationException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return jsonRes;
+	}
 }

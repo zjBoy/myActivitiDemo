@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>认领任务</title>
+<link rel="stylesheet" type="text/css" href="/css/hello.css" ></link>
+<link rel="stylesheet" type="text/css" href="/plugs/bootstrap-3.3.7-dist/css/bootstrap.min.css" ></link>
+<script src="/js/jquery-1.8.2.min.js"></script>
+<script src="/js/angular/angular-1.5.8.min.js"></script>
+<script>
+	
+	var app = angular.module('myApp', []);
+	app.controller('claimTaskCtrl', function($scope, $http) {
+		$scope.claimTask=function(){
+			  $http.post("/claimTaskList").success(function (response) {
+				$scope.items = response;
+			  });
+		};
+	});
+	
+</script>
+
+</head>
+<body>
+<div id="divMain" ng-app="myApp" ng-controller="claimTaskCtrl" data-ng-init="claimTask()">
+<div ng-include="'menu.html'"></div>
+	<table class="table table-bordered">
+		<tr>
+			<th>序号</th>
+			<th>任务编号</th>
+			<th>任务名称</th>
+			<th>创建时间</th>
+			<th>操作</th>
+		</tr>
+		<tr ng-repeat="x in items">
+			<td>{{ $index + 1 }}</td>
+			<td ng-bind="x.id"></td>
+			<td ng-bind="x.name"></td>
+			<td ng-bind="x.time"></td>
+			<td><a>认领</a></td>
+		</tr>
+	</table>
+	<ul class="pagination">
+    <li><a href="#">&laquo;</a></li>
+    <li class="active"><a href="#">1</a></li>
+    <li class="disabled"><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#">&raquo;</a></li>
+</ul>
+</div>
+
+</body>
+</html>

@@ -2,30 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>任务列表，索取任务</title>
+<title>审批任务</title>
 <link rel="stylesheet" type="text/css" href="/css/hello.css" ></link>
 <link rel="stylesheet" type="text/css" href="/plugs/bootstrap-3.3.7-dist/css/bootstrap.min.css" ></link>
 <script src="/js/angular/angular-1.0.1.min.js"></script>
-<style>
-#divMain {
-width: 500px;
-margin: 0 auto;
-margin-top: 100px;
-}
-nav {
-position: relative;
-width:100%;
-height: 50px;
-}
-.pagination {
-right: 0px;
-position: absolute;
-top: -30px;
-}
-nav li {
-cursor: pointer;
-}
-</style>
+
 
 </head>
 <body>
@@ -33,9 +14,9 @@ cursor: pointer;
 	<table class="table table-bordered">
 		<tr ng-repeat="x in items">
 			<td>{{ $index + 1 }}</td>
-			<td ng-bind="x.Name"></td>
-			<td ng-bind="x.City"></td>
-			<td ng-bind="x.Country"></td>
+			<td ng-bind="x.id"></td>
+			<td ng-bind="x.name"></td>
+			<td ng-bind="x.time"></td>
 		</tr>
 	</table>
 </div>

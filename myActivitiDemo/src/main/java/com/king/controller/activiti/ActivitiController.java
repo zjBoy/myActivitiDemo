@@ -1,7 +1,9 @@
 package com.king.controller.activiti;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.activiti.engine.ProcessEngine;
@@ -98,5 +100,34 @@ public class ActivitiController {
 	 @RequestMapping(value="/myTaskList")
 	 public String myTaskList() {
 		 return "myTaskList";
+	 }
+	 /**
+	  * 待认领任务列表
+	  */
+	 @RequestMapping(value="/toClaimTaskList")
+	 public String toClaimTaskList() {
+		 return "toClaimTaskList";
+	 }
+	 /**
+	  * 待认领任务列表
+	  */
+	 @ResponseBody
+	 @RequestMapping(value="/claimTaskList")
+	 public String claimTaskList() {
+		 List<Task> taskList = taskService.createTaskQuery()
+					.processDefinitionKey("leaveBill")
+					.orderByTaskCreateTime()
+					.desc()
+					.list();
+		 List<Map<String,Object>> ls=new ArrayList<Map<String,Object>>();
+		 for(Task task :taskList){
+			 Map<String,Object> map = new HashMap<String,Object>();
+			 map.put("id", task.getId());
+			 map.put("name", task.getName());
+			 map.put("time", task.getCreateTime());
+			 ls.add(map);
+		 }
+		 
+		 return ErrorUtil.toJSONString(ls);
 	 }
 }
